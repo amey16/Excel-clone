@@ -1,110 +1,135 @@
-body{
+body {
     margin: 0;
     overflow: hidden;
+    font-size: 14px;
 }
-.container{
+
+* {
+    box-sizing: border-box;
+}
+
+.container {
     height: 100vh;
+    position: relative;
 }
-.title-bar{
+
+.title-bar {
     height: 5vh;
-    background-color: #107c10;
+    background-color: #107c41;
     display: flex;
     justify-content: center;
     align-items: center;
-    color: white;
+    color: #fff;
 }
-.menu-bar{
+
+.menu-bar {
     height: 5vh;
-    background-color: #107c10;
+    background-color: #107c41;
     display: flex;
-    color: white;
 }
-.menu-item{
+
+.menu-item {
     padding-left: 10px;
     padding-right: 10px;
-    color: white;
-    font-size: 18;
+    color: #fff;
+    font-size: 18px;
     display: flex;
     align-items: center;
 }
+
 .menu-item.selected {
-    background-color: rgb(245, 241, 241);
-    color: #107c10;
+    background-color: #fff;
+    color: #107c41;
 }
+
 .menu-item:hover {
-    background-color: #095309;
+    background-color: #0c5e31;
     cursor: pointer;
 }
-.menu-item.selected:hover{
-    background-color: white;
+
+.menu-item.selected:hover {
+    background-color: #fff;
     cursor: default;
-}
-.menu-icon-bar{
+} 
+
+.menu-icon-bar {
     height: 6vh;
-    display: flex;
-    background-color: rgb(245, 241, 241);
-    align-items: center;
-}
-.menu-icon{
-    padding-left: 10px;
-    padding-right: 10px;
+    background-color: rgb(241, 241, 241);
     display: flex;
     align-items: center;
 }
-.menu-icon:hover{
-    background-color: lightgrey;
+
+.menu-icon {
+   padding-left: 10px;
+   padding-right: 10px;
+   height: 100%;
+   display: flex;
+   align-items: center;
 }
-.font-family-selector{
+
+.menu-icon:hover {
+    background-color: lightgray;
+    cursor: pointer;
+}
+
+.font-family-selector {
     width: 150px;
+    font-family: 'Noto Sans';
 }
-.selector{
+
+.selector {
     height: 30px;
     font-size: 18px;
 }
-.selector option{
+
+.selector option {
     font-size: 18px;
 }
-.formula-bar{
+
+.formula-bar {
     height: 5vh;
     display: flex;
-    justify-content: center;
     align-items: center;
     padding-left: 0.7rem;
     padding-right: 0.7rem;
-    background-color: rgb(245, 241, 241);
+    background-color: rgb(241, 241, 241);
 }
-.data-container{
+
+.data-container {
     height: 75vh;
-    width: 100vw;
     display: flex;
     flex-wrap: wrap;
 }
-.select-all{
+
+.select-all {
     width: 30px;
     height: 30px;
     border: 1px solid lightgray;
 }
-.column-name-container{
+
+.column-name-container {
     width: calc(100vw - 30px);
     height: 30px;
     border: 1px solid lightgray;
     display: flex;
+    overflow: hidden;
 }
-.row-name-container{
-    height: calc(75vh - 30px);
+
+.row-name-container {
     width: 30px;
+    height: calc(75vh - 30px);
     border: 1px solid lightgray;
     overflow: hidden;
 }
-.input-cell-container{
-    min-width: calc(100vw - 30px);
-    min-height: calc(75vh - 30px);
+
+.input-cell-container {
+    width: calc(100vw - 30px);
+    height: calc(75vh - 30px);
     border: 1px solid lightgray;
+    overflow: scroll;
 }
-.align{
-    display: flex;
-}
-.sheet-bar{
+
+.sheet-bar {
     height: 4vh;
     display: flex;
     align-items: center;
@@ -112,39 +137,57 @@ body{
 .scroller {
     width: 70px;
 }
-.icon-left-scroll, .icon-right-scroll{
+.icon-left-scroll, .icon-right-scroll {
     font-size: 30px;
 }
-.icon-left-scroll:hover, .icon-right-scroll:hover{
+
+.icon-left-scroll:hover, .icon-right-scroll:hover {
     background-color: lightgray;
     cursor: pointer;
 }
-.icon-add:hover{
+
+.icon-add {
+    color: #107c41;
+    margin-left: 10px;
+    margin-right: 10px;
+    width: 40px;
+}
+
+.icon-add:hover {
     cursor: pointer;
     transform: scale(1.2);
 }
-.icon-add{
-    color: #107c10;
-    width: 40px;
-}
-.sheet-tab-container{
+.sheet-tab-container {
     border: 1px solid lightgray;
     width: calc(100vw - 110px);
+    display: flex;
 }
-.sheet-tab{
-    border-bottom: 4px solid #107c10;
+.sheet-tab {
     padding-left: 10px;
     padding-right: 10px;
-    width: 70px;
+    display: flex;
+    width: 80px;
     align-items: center;
     justify-content: center;
     font-weight: 600;
-    border-right: 1px solid lightgrey;
+    border-right: 1px solid lightgray;
 }
-.sheet-tab:hover{
+
+.sheet-tab.selected {
+    border-bottom: 4px solid#107c41;
+}
+
+.sheet-tab:hover {
+    cursor: pointer;
+    background-color: lightgray;
+}
+
+.sheet-tab.selected:hover {
     cursor: default;
+    background-color: #fff;
 }
-.column-name{
+
+.column-name {
     min-width: 100px;
     display: flex;
     justify-content: center;
@@ -152,49 +195,155 @@ body{
     border-right: 1px solid lightgray;
     font-weight: bold;
 }
-.row-name{
+
+.row-name {
     display: flex;
     justify-content: center;
     align-items: center;
     min-height: 25px;
     border-bottom: 1px solid lightgray;
+    font-weight: bold;
 }
-.cell-row{
+
+.cell-row {
     display: flex;
 }
-.input-cell{
-    min-height: 25px;
+
+.input-cell {
     min-width: 100px;
-    border-bottom: 1px solid lightgray;
+    min-height: 25px;
     border-right: 1px solid lightgray;
-    outline-color: #107c10;
+    border-bottom: 1px solid lightgray;
+    outline-color: #107c41;
+    font-size: 14px;
+    font-family: 'Noto Sans';
 }
+
+.input-cell.selected {
+    border: 2px solid #107c41;
+}
+
 .formula-editor {
     height: 70%;
     border: 1px solid lightgray;
-    background-color: white;
+    background-color: #fff;
     padding-left: 0.7rem;
     padding-right: 0.7rem;
     display: flex;
     align-items: center;
 }
+
 .selected-cell {
     width: 120px;
-    border: 1px solid lightgray;
 }
+
 .function-sign {
     width: 40px;
     display: flex;
     justify-content: center;
     align-items: center;
 }
+
 .formula-input {
     width: calc(100vw - 160px);
-    outline-color: #107c10;
+    outline-color: #107c41;
 }
+
 .menu-icon.selected {
     background-color: lightgray;
 }
-.input-cell.selected{
-    border: 2px solid #107c10;
+
+.input-cell.top-cell-selected {
+    border-top: none;
+}
+
+.input-cell.bottom-cell-selected {
+    border-bottom: 1px solid lightgray;
+}
+
+.input-cell.right-cell-selected {
+    border-right: 1px solid lightgray;
+}
+
+.input-cell.left-cell-selected {
+    border-left: none;
+}
+
+.color-picker {
+    position: absolute;
+    width: 26px;
+    height: 12px;
+    border: none;
+    padding: 0;
+    top: 30px;
+    left: 9px;
+    cursor: pointer;
+}
+
+.icon-color-fill, .icon-color-text {
+    position: relative;
+}
+
+.sheet-options-modal {
+    position: absolute;
+    bottom: 4vh;
+    background-color: #fff;
+    height: 60px;
+    width: 70px;
+    box-shadow: 0 0 3px 1px lightgray;
+}
+
+.sheet-rename,.sheet-delete {
+    height: 30px;
+    font-weight: 500;
+    font-size: 16px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.sheet-delete:hover, .sheet-rename:hover {
+    background-color: lightgray;
+    cursor: pointer;
+}
+
+.sheet-rename-modal {
+    position: absolute;
+    height: 180px;
+    width: 300px;
+    top: calc(100vh / 2 - 90px);
+    left: calc(100vw / 2 - 150px);
+    background-color: white;
+    text-align: center;
+    box-shadow: 0 0 3px 1px lightgray;
+}
+
+.action-buttons {
+    display: flex;
+    justify-content: space-evenly;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.modal-title {
+    font-size: 20px;
+}
+
+.new-sheet-name {
+    height: 26px;
+    font-size: 18px;
+    outline-color: #107c41;
+}
+
+.submit-button {
+    cursor: pointer;
+    background-color: #107c41;
+    color: white;
+    padding: 8px;
+}
+
+.cancel-button {
+    cursor: pointer;
+    background-color: lightgray;
+    padding: 8px;
 }
