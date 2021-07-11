@@ -100,16 +100,18 @@ $(document).ready(function () {
         $(this).addClass("selected");
         changeHeader(this);
     });
-
+    // two way mergeable
     function changeHeader(ele) {
         let [rowId,colId] = getRowCol(ele);
         let cellInfo = defaultProperties;
         if(cellData[selectedSheet][rowId] && cellData[selectedSheet][rowId][colId]) {
             cellInfo = cellData[selectedSheet][rowId][colId];
         }
+        //ternary operator
         cellInfo["font-weight"] ? $(".icon-bold").addClass("selected") : $(".icon-bold").removeClass("selected");
         cellInfo["font-style"] ? $(".icon-italic").addClass("selected") : $(".icon-italic").removeClass("selected");
         cellInfo["text-decoration"] ? $(".icon-underline").addClass("selected") : $(".icon-underline").removeClass("selected");
+        
         let alignment = cellInfo["text-align"];
         $(".align-icon.selected").removeClass("selected");
         $(".icon-align-" + alignment).addClass("selected");
