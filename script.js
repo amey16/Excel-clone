@@ -106,4 +106,35 @@ function getRowCol(ele) {
     let colId = parseInt(idArray[3]);
     return [rowId,colId];
 }
+function updateCell(property,value){
+    $(".input-cell.selected").each(function(){ //each runs a for loop
+        $(this).css(property,value);
+    })
+}
+//Added bold italic underline and required properties from w3schools
+$(".icon-bold").click(function(){
+    if($(this).hasClass("selected")) {
+        updateCell("font-weight","");
+    }
+    else{
+        updateCell("font-weight","bold");
+    }
+})
 
+$(".icon-italic").click(function(){
+    if($(this).hasClass("selected")) {
+        updateCell("font-style","");
+    }
+    else{
+        updateCell("font-style","italic");
+    }
+})
+
+$(".icon-underline").click(function(){
+    if($(this).hasClass("selected")) {
+        updateCell("text-decoration","");
+    }
+    else{
+        updateCell("text-decoration","underline");
+    }
+})
