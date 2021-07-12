@@ -172,9 +172,9 @@ body {
     font-weight: 600;
     border-right: 1px solid lightgray;
 }
-
+/* to make the new sheet tab give green */
 .sheet-tab.selected {
-    border-bottom: 4px solid#107c41;
+    border-bottom: 4px solid #107c41;
 }
 
 .sheet-tab:hover {

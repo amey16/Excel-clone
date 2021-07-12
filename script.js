@@ -4,8 +4,8 @@ let defaultProperties = {
     "font-style": "",
     "text-decoration": "",
     "text-align": "left",
-    "background-color": "#ffffff",
-    "color": "#000000",
+    "background-color": "#ffffff", //white
+    "color": "#000000", //black
     "font-family": "Noto Sans",
     "font-size": "14px"
 }
@@ -129,6 +129,7 @@ $(document).ready(function () {
         $(this).focus();
     });
 
+    // save data only when focus is removed
     $(".input-cell").blur(function(){
         $(".input-cell.selected").attr("contenteditable","false");
         updateCell("text", $(this).text());
@@ -218,3 +219,101 @@ $(".icon-align-right").click(function() {
         updateCell("text-align","right",true);
     }
 });
+
+// adding background and text color pickers
+$(".color-fill-icon").click(function(){
+    $(".background-color-picker").click();
+});
+
+$(".color-fill-text").click(function(){
+    $(".text-color-picker").click();
+});
+
+// 2way linking
+$(".background-color-picker").change(function(){
+    updateCell("background-color",$(this).val())
+});
+
+$(".text-color-picker").change(function(){
+    updateCell("color",$(this).val())
+}); 
+
+$(".font-family-selector").change(function() {
+    updateCell("font-family", $(this).val());
+    $(".font-family-selector").css("font-family", $(this).val());
+});
+
+$(".font-size-selector").change(function() {
+    updateCell("font-size", $(this).val());
+});
+
+//sheet features
+function emptySheet(){
+    let sheetInfo = cellData[selectedSheet];
+    // making a black sheet with all cells as default
+    for(let i of Object.keys(sheetInfo)){
+        for(let j of Object.keys(sheetInfo[i])) {
+            $(`#row-${i}-col-${j}`).text("");
+            $(`#row-${i}-col-${j}`).css("background-color", "#ffffff");
+            $(`#row-${i}-col-${j}`).css("color", "#000000");
+            $(`#row-${i}-col-${j}`).css("text-align", "left");
+            $(`#row-${i}-col-${j}`).css("font-weight", "");
+            $(`#row-${i}-col-${j}`).css("font-style", "");
+            $(`#row-${i}-col-${j}`).css("text-decoration", "");
+            $(`#row-${i}-col-${j}`).css("font-family", "Noto Sans");
+            $(`#row-${i}-col-${j}`).css("font-size", "14px");    
+        }
+    }
+}
+
+// functiom to load the sheet in which we made changes 
+function loadSheet() {
+    let sheetInfo = cellData[selectedSheet];
+    for(let i of Object.keys(sheetInfo)) {
+        for(let j of Object.keys(sheetInfo[i])) {
+            let cellInfo = cellData[selectedSheet][i][j];
+            $(`#row-${i}-col-${j}`).text(cellInfo["text"]);
+            $(`#row-${i}-col-${j}`).css("background-color", cellInfo["background-color"]);
+            $(`#row-${i}-col-${j}`).css("color", cellInfo["color"]);
+            $(`#row-${i}-col-${j}`).css("text-align", cellInfo["text-align"]);
+            $(`#row-${i}-col-${j}`).css("font-weight", cellInfo["font-weight"]);
+            $(`#row-${i}-col-${j}`).css("font-style", cellInfo["font-style"]);
+            $(`#row-${i}-col-${j}`).css("text-decoration", cellInfo["text-decoration"]);
+            $(`#row-${i}-col-${j}`).css("font-family", cellInfo["font-family"]);
+            $(`#row-${i}-col-${j}`).css("font-size", cellInfo["font-size"]);
+        }
+    }
+}
+
+// function for making new sheets
+let lastlyAddedSheet = 1;
+$(".icon-add").click(function(){
+    emptySheet();
+    $(".sheet-tab.selected").removeClass("selected");
+    let sheetName = "Sheet" + (lastlyAddedSheet + 1);
+    cellData[sheetName] = {};
+    totalSheets += 1;
+    lastlyAddedSheet += 1;
+    selectedSheet = sheetName;
+    $(".sheet-tab-container").append(`<div class="sheet-tab selected">${sheetName}</div>`);
+    
+    addSheetEvents();
+});
+
+function addSheetEvents() {
+    $(".sheet-tab.selected").click(function(){
+        if(!$(this).hasClass("selected")) {
+            selectSheet(this);
+        }
+    });
+}
+
+addSheetEvents();
+
+function selectSheet(ele) {
+    $(".sheet-tab.selected").removeClass("selected");
+    $(ele).addClass("selected");
+    emptySheet();
+    selectedSheet = $(ele).text();
+    loadSheet();
+}
